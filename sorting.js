@@ -2,13 +2,14 @@ sortBtn = document.getElementById("sort")
 inputTxt = document.getElementById("input")
 inputDiv = document.getElementById("inputDiv")
 outputDiv = document.getElementById("outputDiv")
+algoDiv = document.getElementById("algo")
 
 class Sorting{
 
-    constructor(A){
-        this.items = A
+    constructor(items,IO){
+        this.items = items
         this.timer = ""
-        this.IOHandler = ""
+        this.IOHandler = IO
     }
 
     set Timer(x){
@@ -50,7 +51,7 @@ class Sorting{
         }
         if (flag == 0 )
             clearInterval(this.timer);
-        this.IOHandler.draw("outputDiv",this.items,steps,flag)
+        this.IOHandler.draw(outputDiv,this.items,steps,flag)
     }
 
 }
@@ -64,12 +65,16 @@ class InputOutput{
         return items
     }
 
-    clearInput = () => {
-        let child = inputDiv.lastElementChild;  
+    clearDiv = (divName) => {
+        let child = divName.lastElementChild;  
         while (child) { 
-            inputDiv.removeChild(child); 
-            child = inputDiv.lastElementChild; 
+            divName.removeChild(child); 
+            child = divName.lastElementChild; 
         } 
+    }
+
+    displayAlgo = () => {
+        clearDiv(algoDiv)
     }
     
     draw = (div,items,steps,color) => {
@@ -81,7 +86,7 @@ class InputOutput{
             let textnode = document.createTextNode(i)
             node.appendChild(textnode)
             out.appendChild(node)
-            document.getElementById(div).appendChild(out)
+            div.appendChild(out)
         }
 
         let step = document.createElement("div")
@@ -96,35 +101,24 @@ class InputOutput{
         step.appendChild(list)
         out.appendChild(step)
     }
-
-    clearOutput = () => {
-        let child = outputDiv.lastElementChild;  
-        while (child) { 
-            outputDiv.removeChild(child); 
-            child = outputDiv.lastElementChild; 
-        } 
-    }
-
     
 }
-
-
-
 var myInputOutput = new InputOutput()
+
 
 
 inputTxt.oninput = ()=>{
     
-    myInputOutput.clearInput()
+    myInputOutput.clearDiv(inputDiv)
     myInput = myInputOutput.getInput()
-    mySorting = new Sorting(myInput)
-    mySorting.IO = myInputOutput
-    myInputOutput.draw("inputDiv",myInput)
+    mySorting = new Sorting(myInput,myInputOutput)
+
+    myInputOutput.draw(inputDiv,myInput)
 }
 
 sortBtn.onclick = () =>{
     
-    myInputOutput.clearOutput()
+    myInputOutput.clearDiv(outputDiv)
     mySorting.Items = myInputOutput.getInput()
     mySorting.Timer = setInterval(mySorting.bubbleSort, 1000)
 }
