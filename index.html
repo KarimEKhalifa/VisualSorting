@@ -9,26 +9,29 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
-        <div class="col-sm"><h2>Visual Sorting</h2></div>
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
-    </div>
-    <div class="container-flex">
+    <div class="container">
         <div class="row">
-            <input class="col-sm" id="input" type="text"></input>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            <div class="col-sm"><h2>Visual Sorting</h2></div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
         </div>
-        <div class="row">
-            <button class="col-sm" id="sort">Sort</button>
+        <div class="container-flex">
+            <div class="row">
+                <div class="input-group mb-3">
+                    <input class="col-11 form-control" id="input" type="text"></input>
+                    <button class="col-1 btn btn btn-outline-primary" id="sort">Sort</button>
+                </div>
+                
+            </div>
+            <div  id="inputDiv"></div>
+            <div  class = "overflow-auto" id="outputDiv"></div>
         </div>
-        <div class="jumbotron" id="inputDiv"></div>
-        <div  id="outputDiv"></div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="sorting.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="sorting.js"></script>
 </body>
 </html>

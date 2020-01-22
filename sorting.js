@@ -8,6 +8,7 @@ class Sorting{
     constructor(A){
         this.items = A
         this.timer = ""
+        this.IOHandler = ""
     }
 
     set Timer(x){
@@ -26,21 +27,18 @@ class Sorting{
         return this.items
     }
 
-    draw = (div,color) => {
-        let out = document.createElement("div")
-        out.className = "series"
-        for( let i of this.items){
-            let node = document.createElement("div")
-            color==0?node.className = "ball green":node.className = "ball red"
-            let textnode = document.createTextNode(i)
-            node.appendChild(textnode)
-            out.appendChild(node)
-            document.getElementById(div).appendChild(out)
-        }
+    set IO(x){
+        this.IOHandler = x
     }
 
-    sort = () => {
+    get IO(){
+        return this.IOHandler
+    }
+
+
+    bubbleSort = () => {
         let flag = 0
+        let steps=[]
         console.log(this.timer)
         for( let i=0; i< this.items.length-1; i++){
             if(this.items[i] > this.items[i+1]){
@@ -48,16 +46,17 @@ class Sorting{
                 this.items[i] = this.items[i+1]
                 this.items[i+1] = temp
                 flag = 1
+                steps.push(this.items[i]+" has been switch with "+this.items[i+1])
             }
         }
-        if (flag ==0 ){
+        if (flag == 0 ){
             clearInterval(this.timer);
-            let child = outputDiv.lastElementChild;
-            if(child)
-                outputDiv.removeChild(child);
+            // let child = outputDiv.lastElementChild;
+            // if(child)
+            //     outputDiv.removeChild(child);
         }
-
-        this.draw("outputDiv",flag)
+        console.log(steps)
+        this.IOHandler.draw("outputDiv",this.items,steps,flag)
     }
 
 }
@@ -78,6 +77,31 @@ class InputOutput{
             child = inputDiv.lastElementChild; 
         } 
     }
+    
+    draw = (div,items,steps,color) => {
+        let out = document.createElement("div")
+        out.className = "series jumbotron"
+        for( let i of items){
+            let node = document.createElement("div")
+            color==0?node.className = "ball green":node.className = "ball red"
+            let textnode = document.createTextNode(i)
+            node.appendChild(textnode)
+            out.appendChild(node)
+            document.getElementById(div).appendChild(out)
+        }
+
+        let step = document.createElement("div")
+        let list = document.createElement("ul")
+        step.className = "steps"
+        for( let i of steps){
+            let node = document.createElement("li")
+            let textnode = document.createTextNode(i)
+            node.appendChild(textnode)
+            list.appendChild(node)
+        }
+        step.appendChild(list)
+        out.appendChild(step)
+    }
 
     clearOutput = () => {
         let child = outputDiv.lastElementChild;  
@@ -86,6 +110,8 @@ class InputOutput{
             child = outputDiv.lastElementChild; 
         } 
     }
+
+    
 }
 
 
@@ -96,13 +122,15 @@ var myInputOutput = new InputOutput()
 inputTxt.oninput = ()=>{
     
     myInputOutput.clearInput()
-    mySorting = new Sorting(myInputOutput.getInput())
-    mySorting.draw("inputDiv")
+    myInput = myInputOutput.getInput()
+    mySorting = new Sorting(myInput)
+    mySorting.IO = myInputOutput
+    myInputOutput.draw("inputDiv",myInput)
 }
 
 sortBtn.onclick = () =>{
     
     myInputOutput.clearOutput()
-    mySorting.items = myInputOutput.getInput()
-    mySorting.Timer = setInterval(mySorting.sort, 1000)
+    mySorting.Items = myInputOutput.getInput()
+    mySorting.Timer = setInterval(mySorting.bubbleSort, 1000)
 }
