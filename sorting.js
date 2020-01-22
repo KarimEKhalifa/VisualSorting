@@ -39,7 +39,6 @@ class Sorting{
     bubbleSort = () => {
         let flag = 0
         let steps=[]
-        console.log(this.timer)
         for( let i=0; i< this.items.length-1; i++){
             if(this.items[i] > this.items[i+1]){
                 let temp = this.items[i]
@@ -49,13 +48,8 @@ class Sorting{
                 steps.push(this.items[i]+" has been switch with "+this.items[i+1])
             }
         }
-        if (flag == 0 ){
+        if (flag == 0 )
             clearInterval(this.timer);
-            // let child = outputDiv.lastElementChild;
-            // if(child)
-            //     outputDiv.removeChild(child);
-        }
-        console.log(steps)
         this.IOHandler.draw("outputDiv",this.items,steps,flag)
     }
 
@@ -80,7 +74,7 @@ class InputOutput{
     
     draw = (div,items,steps,color) => {
         let out = document.createElement("div")
-        out.className = "series jumbotron"
+        out.className = "series"
         for( let i of items){
             let node = document.createElement("div")
             color==0?node.className = "ball green":node.className = "ball red"

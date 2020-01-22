@@ -11,22 +11,43 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
-            <div class="col-sm"><h2>Visual Sorting</h2></div>
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
+            <div id="title"><h2>Visual Sorting</h2></div>
         </div>
         <div class="container-flex">
             <div class="row">
                 <div class="input-group mb-3">
-                    <input class="col-11 form-control" id="input" type="text"></input>
+                    <input class="col-10 form-control" id="input" type="text"></input>
+                    <div class=" dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bubble
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item active" href="#">Bubble</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
                     <button class="col-1 btn btn btn-outline-primary" id="sort">Sort</button>
                 </div>
-                
             </div>
-            <div  id="inputDiv"></div>
-            <div  class = "overflow-auto" id="outputDiv"></div>
+            <div id="algoin" class="row">
+                <div  class = "col-8 jumbotron "  id="inputDiv"></div>
+                <pre>  </pre>
+                <pre class = "col jumbotron" id="algo">
+begin BubbleSort(list)
+
+    for all elements of list
+        if list[i] > list[i+1]
+            swap(list[i], list[i+1])
+        end if
+    end for
+   
+    return list
+   
+end BubbleSort
+                </pre>
+            </div>
+            <div  id="outputDiv"></div>
         </div>
     </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
