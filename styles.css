@@ -28,3 +28,7 @@
   .green{
     background-color: green;
   }
+
+  .hidden{
+    display: none;
+  }

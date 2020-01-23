@@ -17,35 +17,44 @@
             <div class="row">
                 <div class="input-group mb-3">
                     <input class="col-10 form-control" id="input" type="text"></input>
-                    <div class=" dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bubble
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item active" href="#">Bubble</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                        <select class="col-1 form-control" id="algoSel">
+                            <option>Bubble</option>
+                            <option>Selection</option>
+                            <option>3</option>
+                            <option>4</option>
+                    </select>
                     <button class="col-1 btn btn btn-outline-primary" id="sort">Sort</button>
                 </div>
             </div>
             <div id="algoin" class="row">
-                <div  class = "col-8 jumbotron "  id="inputDiv"></div>
-                <pre>  </pre>
-                <pre class = "col jumbotron" id="algo">
+                <div  class = "col-7 jumbotron "  id="inputDiv"></div>
+                <div id="algoDisp">
+                    <pre class = "Algo col jumbotron" id="bubblePre">
 begin BubbleSort(list)
-
-    for all elements of list
-        if list[i] > list[i+1]
-            swap(list[i], list[i+1])
-        end if
-    end for
-   
+    while not sorted
+        for all elements of list
+            if list[i] > list[i+1]
+                swap(list[i], list[i+1])
+            end if
+        end for
+    end while
     return list
-   
 end BubbleSort
-                </pre>
+                    </pre>
+                    <pre class = "Algo col jumbotron" id="selectionPre">
+begin SelectionSort(list)
+    set MIN to list[0]
+    while not sorted
+        for all elements of list
+            Find the minimum element in the list
+        end for
+        Swap with value at location MIN
+        Increment MIN to point to next element
+    end while
+    return list
+end SelectionSort
+                    </pre>
+                </div>
             </div>
             <div  id="outputDiv"></div>
         </div>

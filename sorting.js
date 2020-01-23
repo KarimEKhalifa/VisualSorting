@@ -2,7 +2,10 @@ sortBtn = document.getElementById("sort")
 inputTxt = document.getElementById("input")
 inputDiv = document.getElementById("inputDiv")
 outputDiv = document.getElementById("outputDiv")
-algoDiv = document.getElementById("algo")
+algoDisp = document.getElementById("algoDisp")
+bubblePre = document.getElementById("bubblePre")
+selectionPre = document.getElementById('selectionPre')
+algoSel = document.getElementById("algoSel")
 
 class Sorting{
 
@@ -10,6 +13,7 @@ class Sorting{
         this.items = items
         this.timer = ""
         this.IOHandler = IO
+        this.iteration = 0
     }
 
     set Timer(x){
@@ -54,6 +58,35 @@ class Sorting{
         this.IOHandler.draw(outputDiv,this.items,steps,flag)
     }
 
+    selectionSort = () => {
+        console.log(this.iteration)
+        let flag = 1
+        let steps=[]
+        let minIndex = this.iteration
+        for( let i=this.iteration+1; i< this.items.length; i++){
+            if(this.items[i] < this.items[minIndex])
+                minIndex = i
+        }
+
+        if(minIndex != this.iteration){
+            let temp = this.items[this.iteration]
+            this.items[this.iteration] = this.items[minIndex]
+            this.items[minIndex] = temp
+            steps.push(this.items[this.iteration]+" has been switch with "+this.items[minIndex])
+        }else{
+            steps.push(this.items[this.iteration]+" is the list's smallest element")
+        }
+         
+        if (this.iteration == this.items.length -1 ){
+            clearInterval(this.timer)
+            this.iteration = 0
+            flag = 0
+        }
+
+        this.IOHandler.draw(outputDiv,this.items,steps,flag)
+        this.iteration++
+    }
+
 }
 
 class InputOutput{
@@ -73,10 +106,21 @@ class InputOutput{
         } 
     }
 
-    displayAlgo = () => {
-        clearDiv(algoDiv)
+    clearAlgo = () => {
+        [].forEach.call(document.querySelectorAll('.Algo'), function (el) {
+        el.style.display = 'none'})
     }
-    
+
+    selectAlgo = (selected) => {
+        console.log(selected)
+
+        if (selected == "Bubble")
+            bubblePre.style.display = 'block'
+        else if (selected == "Selection")
+             selectionPre.style.display = 'block'
+    }
+
+
     draw = (div,items,steps,color) => {
         let out = document.createElement("div")
         out.className = "series"
@@ -89,36 +133,51 @@ class InputOutput{
             div.appendChild(out)
         }
 
-        let step = document.createElement("div")
-        let list = document.createElement("ul")
-        step.className = "steps"
-        for( let i of steps){
-            let node = document.createElement("li")
-            let textnode = document.createTextNode(i)
-            node.appendChild(textnode)
-            list.appendChild(node)
+        if(steps){
+            let step = document.createElement("div")
+            let list = document.createElement("ol")
+            step.className = "steps"
+            for(let i of steps){
+                let node = document.createElement("li")
+                let textnode = document.createTextNode(i)
+                node.appendChild(textnode)
+                list.appendChild(node)
+            }
+            step.appendChild(list)
+            out.appendChild(step)
         }
-        step.appendChild(list)
-        out.appendChild(step)
     }
+
+
     
 }
-var myInputOutput = new InputOutput()
 
 
-
-inputTxt.oninput = ()=>{
-    
+inputTxt.oninput = () => {
     myInputOutput.clearDiv(inputDiv)
     myInput = myInputOutput.getInput()
     mySorting = new Sorting(myInput,myInputOutput)
-
     myInputOutput.draw(inputDiv,myInput)
 }
 
-sortBtn.onclick = () =>{
-    
+sortBtn.onclick = () => {
     myInputOutput.clearDiv(outputDiv)
     mySorting.Items = myInputOutput.getInput()
-    mySorting.Timer = setInterval(mySorting.bubbleSort, 1000)
+
+    let selectedAlgo = mySorting.bubbleSort
+    if(algoSel.value == "Bubble")
+        selectedAlgo = mySorting.bubbleSort
+    else if(algoSel.value == "Selection")
+        selectedAlgo = mySorting.selectionSort
+
+    mySorting.Timer = setInterval(selectedAlgo, 1000)
 }
+
+algoSel.onchange = () => {
+    myInputOutput.clearAlgo()
+    myInputOutput.selectAlgo(algoSel.value)
+}
+
+let myInputOutput = new InputOutput()
+myInputOutput.clearAlgo()
+bubblePre.style.display = 'block'
