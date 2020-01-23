@@ -81,6 +81,7 @@ class Sorting{
             clearInterval(this.timer)
             this.iteration = 0
             flag = 0
+            steps=[]
         }
 
         this.IOHandler.draw(outputDiv,this.items,steps,flag)
@@ -141,10 +142,10 @@ class InputOutput{
                 let node = document.createElement("li")
                 let textnode = document.createTextNode(i)
                 node.appendChild(textnode)
-                list.appendChild(node)
+                list.appendChild(node)           
+                step.appendChild(list)
+                out.appendChild(step)
             }
-            step.appendChild(list)
-            out.appendChild(step)
         }
     }
 
