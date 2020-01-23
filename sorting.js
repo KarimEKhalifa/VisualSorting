@@ -54,7 +54,7 @@ class Sorting{
             }
         }
         if (flag == 0 )
-            clearInterval(this.timer);
+            clearInterval(this.timer)
         this.IOHandler.draw(outputDiv,this.items,steps,flag)
     }
 
@@ -177,6 +177,8 @@ sortBtn.onclick = () => {
 algoSel.onchange = () => {
     myInputOutput.clearAlgo()
     myInputOutput.selectAlgo(algoSel.value)
+    clearInterval(mySorting.Timer)
+    myInputOutput.clearDiv(outputDiv)
 }
 
 let myInputOutput = new InputOutput()
