@@ -55,9 +55,9 @@ class Sorting{
         }
 
         this.IOHandler.draw(outputDiv,this.items,steps,flag)
-        if (flag == 0 ){
+        if (flag == 0 )
             clearInterval(this.timer)
-        }
+        
     }
 
     selectionSort = () => {
@@ -79,15 +79,15 @@ class Sorting{
             steps.push(this.items[this.iteration]+" is the list's smallest element")
         }
 
-        this.IOHandler.draw(outputDiv,this.items,steps,flag)
-        this.iteration++
-
         if (this.iteration == this.items.length -1 ){
             clearInterval(this.timer)
             this.iteration = 0
             flag = 0
             steps=[]
         }
+
+        this.IOHandler.draw(outputDiv,this.items,steps,flag)
+        this.iteration++
     }
 
 }
@@ -126,7 +126,7 @@ class InputOutput{
 
     draw = (div,items,steps,color) => {
         let out = document.createElement("div")
-        out.className = "series"
+        out.className = "series col-8"
         for( let i of items){
             let node = document.createElement("div")
             color==0?node.className = "ball green":node.className = "ball red"
@@ -139,14 +139,14 @@ class InputOutput{
         if(steps){
             let step = document.createElement("div")
             let list = document.createElement("ol")
-            step.className = "steps"
+            step.className = "steps col-3 "
             for(let i of steps){
                 let node = document.createElement("li")
                 let textnode = document.createTextNode(i)
                 node.appendChild(textnode)
                 list.appendChild(node)           
                 step.appendChild(list)
-                out.appendChild(step)
+                div.appendChild(step)
             }
         }
 
