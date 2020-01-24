@@ -53,9 +53,11 @@ class Sorting{
                 steps.push(this.items[i]+" has been switch with "+this.items[i+1])
             }
         }
-        if (flag == 0 )
-            clearInterval(this.timer)
+
         this.IOHandler.draw(outputDiv,this.items,steps,flag)
+        if (flag == 0 ){
+            clearInterval(this.timer)
+        }
     }
 
     selectionSort = () => {
@@ -76,16 +78,16 @@ class Sorting{
         }else{
             steps.push(this.items[this.iteration]+" is the list's smallest element")
         }
-         
+
+        this.IOHandler.draw(outputDiv,this.items,steps,flag)
+        this.iteration++
+
         if (this.iteration == this.items.length -1 ){
             clearInterval(this.timer)
             this.iteration = 0
             flag = 0
             steps=[]
         }
-
-        this.IOHandler.draw(outputDiv,this.items,steps,flag)
-        this.iteration++
     }
 
 }
@@ -147,8 +149,13 @@ class InputOutput{
                 out.appendChild(step)
             }
         }
+
+        this.endOfPage()
     }
 
+    endOfPage = () => {
+        window.scrollTo(0,document.body.scrollHeight)
+    }
 
     
 }
