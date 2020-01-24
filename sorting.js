@@ -125,7 +125,8 @@ class InputOutput{
 
 
     draw = (div,items,steps,color) => {
-        let sortedItems = [...items].sort(Number)
+        let sortedItems = [...items].sort((a, b) => a - b)
+        console.log(sortedItems)
         let itemsSize = items.length
         let out = document.createElement("div")
         out.className = "series col-8"
@@ -134,7 +135,7 @@ class InputOutput{
             color==0?node.className = "ball green":node.className = "ball red"
             let textnode = document.createTextNode(i)
             node.appendChild(textnode)
-            node.style.transform = "scale("+(0.5+(sortedItems.indexOf(i)+1)/itemsSize)+")"
+            node.style.transform = "scale("+(0.4+(sortedItems.indexOf(i)+1)/itemsSize)+")"
             out.appendChild(node)
             div.appendChild(out)
         }
