@@ -27,6 +27,12 @@
     align-items: center;
   }
 
+  .steps{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
   .red{
     background-color: red;
   }
@@ -35,5 +41,5 @@
     background-color: green;
   }
 
-  @media screen and (max-width: 1024px) {  #algoDisp { display: none; } }
+  @media screen and (max-width: 960px) {  #algoDisp { display: none; } }
 

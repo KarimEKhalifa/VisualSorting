@@ -126,31 +126,33 @@ class InputOutput{
 
     draw = (div,items,steps,color) => {
         let sortedItems = [...items].sort((a, b) => a - b)
-        console.log(sortedItems)
         let itemsSize = items.length
         let out = document.createElement("div")
-        out.className = "series col-8"
+        let balls = document.createElement("div")
+        balls.className = "col"
+        out.className = "series row col-12"
         for( let i of items){
             let node = document.createElement("div")
             color==0?node.className = "ball green":node.className = "ball red"
             let textnode = document.createTextNode(i)
             node.appendChild(textnode)
             node.style.transform = "scale("+(0.4+(sortedItems.indexOf(i)+1)/itemsSize)+")"
-            out.appendChild(node)
-            div.appendChild(out)
+            balls.appendChild(node)
         }
+        out.appendChild(balls)
+        div.appendChild(out)
 
         if(steps){
             let step = document.createElement("div")
             let list = document.createElement("ol")
-            step.className = "steps col-3 "
+            step.className = "steps col"
             for(let i of steps){
                 let node = document.createElement("li")
                 let textnode = document.createTextNode(i)
                 node.appendChild(textnode)
                 list.appendChild(node)           
                 step.appendChild(list)
-                div.appendChild(step)
+                out.appendChild(step)
             }
         }
 
