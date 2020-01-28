@@ -1,6 +1,5 @@
 sortBtn = document.getElementById("sort")
 inputTxt = document.getElementById("input")
-inputDiv = document.getElementById("inputDiv")
 outputDiv = document.getElementById("outputDiv")
 algoDisp = document.getElementById("algoDisp")
 bubblePre = document.getElementById("bubblePre")
@@ -179,10 +178,10 @@ class InputOutput{
 
 
 inputTxt.oninput = () => {
-    myInputOutput.clearDiv(inputDiv)
+    myInputOutput.clearDiv(outConti)
     myInput = myInputOutput.getInput()
     mySorting = new Sorting(myInput,myInputOutput)
-    myInputOutput.draw(inputDiv,myInput)
+    myInputOutput.draw(outConti,myInput)
 }
 
 sortBtn.onclick = () => {
@@ -204,6 +203,7 @@ algoSel.onchange = () => {
     clearInterval(mySorting.Timer)
     myInputOutput.clearDiv(outputDiv)
     myInputOutput.clearDiv(outConti)
+    myInputOutput.draw(outConti,myInput)
     algoDisp.style.display = 'none'
 }
 
