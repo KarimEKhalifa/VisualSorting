@@ -19,10 +19,13 @@
       font-size: 1.5vw;
   }
 
+  .col{
+    display: contents;
+  }
+
   .series{
     padding: 20px;
     justify-content: center;
-    display: inline-block;
     align-items: center;
   }
 
@@ -40,5 +43,5 @@
     background-color: green;
   }
 
-  @media screen and (max-width: 960px) {  #algoDisp { display: none; } }
+  @media screen and (max-width: 9000px) {  #algoDisp { display: none; } }
 

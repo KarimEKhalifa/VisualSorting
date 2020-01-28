@@ -6,12 +6,14 @@ algoDisp = document.getElementById("algoDisp")
 bubblePre = document.getElementById("bubblePre")
 selectionPre = document.getElementById('selectionPre')
 algoSel = document.getElementById("algoSel")
+outConti = document.getElementById("outConti")
 
 class Sorting{
 
     constructor(items,IO){
         this.items = items
         this.timer = ""
+        this.steps = []
         this.IOHandler = IO
         this.iteration = 0
     }
@@ -43,29 +45,32 @@ class Sorting{
 
     bubbleSort = () => {
         let flag = 0
-        let steps=[]
+        this.steps = []
         for( let i=0; i< this.items.length-1; i++){
             if(this.items[i] > this.items[i+1]){
                 let temp = this.items[i]
                 this.items[i] = this.items[i+1]
                 this.items[i+1] = temp
                 flag = 1
-                steps.push(this.items[i]+" has been switch with "+this.items[i+1])
+                this.steps.push(this.items[i]+" has been switch with "+this.items[i+1])
             }
         }
-
-        this.IOHandler.draw(outputDiv,this.items,steps,flag)
-        if (flag == 0 )
-            clearInterval(this.timer)
+        this.IOHandler.clearDiv(outConti)
+        this.IOHandler.draw(outConti,this.items,[],flag)
         
+        this.IOHandler.draw(outputDiv,this.items,this.steps,flag)
+        if (flag == 0 ){
+            clearInterval(this.timer)
+            this.steps = []
+            this.IOHandler.endOfPage()
+        }  
     }
 
     selectionSort = () => {
-        console.log(this.iteration)
         let flag = 1
-        let steps=[]
         let minIndex = this.iteration
-        for( let i=this.iteration+1; i< this.items.length; i++){
+        this.steps = []
+        for( let i=this.iteration; i< this.items.length; i++){
             if(this.items[i] < this.items[minIndex])
                 minIndex = i
         }
@@ -74,19 +79,24 @@ class Sorting{
             let temp = this.items[this.iteration]
             this.items[this.iteration] = this.items[minIndex]
             this.items[minIndex] = temp
-            steps.push(this.items[this.iteration]+" has been switch with "+this.items[minIndex])
+            this.steps.push(this.items[this.iteration]+" has been switch with "+this.items[minIndex])
         }else{
-            steps.push(this.items[this.iteration]+" is the list's smallest element")
+            this.steps.push(this.items[this.iteration]+" is the list's smallest element")
         }
 
         if (this.iteration == this.items.length -1 ){
             clearInterval(this.timer)
             this.iteration = 0
             flag = 0
-            steps=[]
+            this.steps=[]
+            this.IOHandler.endOfPage()
+            return
         }
 
-        this.IOHandler.draw(outputDiv,this.items,steps,flag)
+        this.IOHandler.clearDiv(outConti)
+        this.IOHandler.draw(outConti,this.items,[],flag)
+
+        this.IOHandler.draw(outputDiv,this.items,this.steps,flag)
         this.iteration++
     }
 
@@ -115,8 +125,6 @@ class InputOutput{
     }
 
     selectAlgo = (selected) => {
-        console.log(selected)
-
         if (selected == "Bubble")
             bubblePre.style.display = 'block'
         else if (selected == "Selection")
@@ -156,14 +164,11 @@ class InputOutput{
             }
         }
 
-        this.endOfPage()
     }
 
     endOfPage = () => {
         window.scrollTo(0,document.body.scrollHeight)
-    }
-
-    
+    }  
 }
 
 
@@ -192,6 +197,7 @@ algoSel.onchange = () => {
     myInputOutput.selectAlgo(algoSel.value)
     clearInterval(mySorting.Timer)
     myInputOutput.clearDiv(outputDiv)
+    myInputOutput.clearDiv(outConti)
 }
 
 let myInputOutput = new InputOutput()
