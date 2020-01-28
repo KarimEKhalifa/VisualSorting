@@ -145,7 +145,7 @@ class InputOutput{
         if(steps){
             let step = document.createElement("div")
             let list = document.createElement("ol")
-            step.className = "steps col"
+            step.className = "steps col-3"
             for(let i of steps){
                 let node = document.createElement("li")
                 let textnode = document.createTextNode(i)
