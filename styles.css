@@ -2,16 +2,21 @@
   padding-top: 20px;
 }
 
+.jumbotron{
+  margin: 10px;
+}
+
   .ball{
       margin: 0.6vw;
       color: white;
       text-align: center;
       vertical-align: middle;
-      line-height: 3vw;
+      line-height: 3.2vw;
       display: inline-block;
-      width: 3vw;
-      height: 3vw;
+      width: 3.2vw;
+      height: 3.2vw;
       border-radius: 50%;
+      font-size: 1.5vw;
       float: left;
   }
 
@@ -29,4 +34,6 @@
   .green{
     background-color: green;
   }
+
+  @media screen and (max-width: 1024px) {  #algoDisp { display: none; } }
 
