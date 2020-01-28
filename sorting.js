@@ -55,19 +55,22 @@ class Sorting{
                 this.steps.push(this.items[i]+" has been switch with "+this.items[i+1])
             }
         }
-        this.IOHandler.clearDiv(outConti)
-        this.IOHandler.draw(outConti,this.items,[],flag)
-        
-        this.IOHandler.draw(outputDiv,this.items,this.steps,flag)
+
         if (flag == 0 ){
             clearInterval(this.timer)
             this.steps = []
-            this.IOHandler.endOfPage()
+            this.IOHandler.clearDiv(outConti)
+            this.IOHandler.draw(outConti,this.items,[],flag)
+            algoDisp.style.display = 'block'
+            return
         }  
+        this.IOHandler.clearDiv(outConti)
+        this.IOHandler.draw(outConti,this.items,[],flag)
+        this.IOHandler.draw(outputDiv,this.items,this.steps,flag)
     }
 
     selectionSort = () => {
-        let flag = 1
+        let flag = 0
         let minIndex = this.iteration
         this.steps = []
         for( let i=this.iteration; i< this.items.length; i++){
@@ -80,17 +83,20 @@ class Sorting{
             this.items[this.iteration] = this.items[minIndex]
             this.items[minIndex] = temp
             this.steps.push(this.items[this.iteration]+" has been switch with "+this.items[minIndex])
-        }else{
+            flag = 1
+        }else if(this.iteration != this.items.length){
             this.steps.push(this.items[this.iteration]+" is the list's smallest element")
+            flag = 1
         }
 
-        if (this.iteration == this.items.length ){
+        if (this.iteration == this.items.length && flag == 0 ){
             clearInterval(this.timer)
             this.iteration = 0
-            flag = 0
             this.steps=[]
-            this.IOHandler.endOfPage()
-            return
+            this.IOHandler.clearDiv(outConti)
+            this.IOHandler.draw(outConti,this.items,[],flag)
+            algoDisp.style.display = 'block'
+            return 
         }
         this.IOHandler.clearDiv(outConti)
         this.IOHandler.draw(outConti,this.items,[],flag)
@@ -198,6 +204,7 @@ algoSel.onchange = () => {
     clearInterval(mySorting.Timer)
     myInputOutput.clearDiv(outputDiv)
     myInputOutput.clearDiv(outConti)
+    algoDisp.style.display = 'none'
 }
 
 let myInputOutput = new InputOutput()

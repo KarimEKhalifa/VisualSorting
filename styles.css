@@ -2,6 +2,10 @@
   padding-top: 20px;
 }
 
+#algoDisp{
+  display: none;
+}
+
 .jumbotron{
   margin: 10px;
 }
@@ -43,5 +47,5 @@
     background-color: green;
   }
 
-  @media screen and (max-width: 9000px) {  #algoDisp { display: none; } }
+  @media screen and (max-width: 900px) {  #algoDisp { display: none; } }
 
