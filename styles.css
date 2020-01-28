@@ -2,6 +2,11 @@
   padding-top: 20px;
 }
 
+#outConti{
+  display: block;
+  background-color: lightgrey;
+}
+
 #algoDisp{
   display: none;
 }
