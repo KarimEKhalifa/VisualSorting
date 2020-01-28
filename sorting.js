@@ -84,7 +84,7 @@ class Sorting{
             this.steps.push(this.items[this.iteration]+" is the list's smallest element")
         }
 
-        if (this.iteration == this.items.length -1 ){
+        if (this.iteration == this.items.length ){
             clearInterval(this.timer)
             this.iteration = 0
             flag = 0
@@ -92,11 +92,11 @@ class Sorting{
             this.IOHandler.endOfPage()
             return
         }
-
         this.IOHandler.clearDiv(outConti)
         this.IOHandler.draw(outConti,this.items,[],flag)
 
         this.IOHandler.draw(outputDiv,this.items,this.steps,flag)
+
         this.iteration++
     }
 
