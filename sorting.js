@@ -176,6 +176,8 @@ class InputOutput{
 
 
 inputTxt.oninput = () => {
+    algoDisp.style.display = 'none'
+    myInputOutput.clearDiv(outputDiv)
     myInputOutput.clearDiv(outConti)
     myInput = myInputOutput.getInput()
     mySorting = new Sorting(myInput,myInputOutput)
