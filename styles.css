@@ -50,3 +50,24 @@
     background-color: green;
   }
 
+  body {
+    background: linear-gradient(-45deg, #ca8671, #8f4a64, #3f6472, #53867a);
+    background-size: 1000% 1000%;
+    animation: gradient 15s ease infinite;
+  }
+
+  li{
+    color: white;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
