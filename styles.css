@@ -4,7 +4,6 @@
 
 #outConti{
   display: block;
-  background-color: #e9ecef;
 }
 
 #algoDisp{
@@ -40,7 +39,6 @@
 
   .steps{
     justify-content: center;
-    display: flex;
     align-items: center;
   }
 
@@ -51,6 +49,4 @@
   .green{
     background-color: green;
   }
-
-  @media screen and (max-width: 900px) {  #algoDisp { display: none; } }
 

@@ -84,7 +84,7 @@ class Sorting{
             this.steps.push(this.items[this.iteration]+" has been switch with "+this.items[minIndex])
             flag = 1
         }else if(this.iteration != this.items.length){
-            this.steps.push(this.items[this.iteration]+" is the list's smallest element")
+            this.steps.push(this.items[this.iteration]+" is the sub-list's smallest element")
             flag = 1
         }
 
@@ -158,7 +158,7 @@ class InputOutput{
         if(steps){
             let step = document.createElement("div")
             let list = document.createElement("ol")
-            step.className = "steps col-3"
+            step.className = "steps col"
             for(let i of steps){
                 let node = document.createElement("li")
                 let textnode = document.createTextNode(i)
@@ -171,9 +171,7 @@ class InputOutput{
 
     }
 
-    endOfPage = () => {
-        window.scrollTo(0,document.body.scrollHeight)
-    }  
+    endOfPage = () => window.scrollTo(0,document.body.scrollHeight) 
 }
 
 
