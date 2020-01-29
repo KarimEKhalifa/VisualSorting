@@ -88,9 +88,10 @@ class Sorting{
             flag = 1
         }
 
-        if (this.iteration == this.items.length && flag == 0 ){
+        if (this.iteration == this.items.length -1){
             clearInterval(this.timer)
             this.iteration = 0
+            flag = 0
             this.steps=[]
             this.IOHandler.clearDiv(outConti)
             this.IOHandler.draw(outConti,this.items,[],flag)
