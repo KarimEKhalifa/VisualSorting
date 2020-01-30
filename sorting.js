@@ -4,15 +4,54 @@ outputDiv = document.getElementById("outputDiv")
 algoDisp = document.getElementById("algoDisp")
 bubblePre = document.getElementById("bubblePre")
 selectionPre = document.getElementById('selectionPre')
+heapPre = document.getElementById("heapPre")
 algoSel = document.getElementById("algoSel")
 outConti = document.getElementById("outConti")
+
+class Heapify{
+
+    constructor(list){
+        this.list = list
+    }
+
+    set List(x){
+        this.list = x
+    }
+
+    get List(){
+        return this.list
+    }
+
+    getRoot(){
+        return this.list.shift()
+    }
+
+    minHeap = () => {
+        let min = this.list[0]
+        let minIndex = 0
+        for( let i in this.list){
+            if(this.list[i]<min){
+                min = this.list[i]
+                minIndex = i
+            }
+        }
+
+        if(minIndex!=0){
+            let temp = this.list[0]
+            this.list[0] = this.list[minIndex]
+            this.list[minIndex] = temp
+        }
+    }
+}
 
 class Sorting{
 
     constructor(items,IO){
         this.items = items
+        this.oItems = [...items]
         this.timer = ""
         this.steps = []
+        this.heapRes = []
         this.IOHandler = IO
         this.iteration = 0
     }
@@ -41,6 +80,29 @@ class Sorting{
         return this.IOHandler
     }
 
+    heapSort = () => {
+        let flag = 1
+        let myHeap = new Heapify(this.items)
+        myHeap.minHeap()
+        let rootCheck = myHeap.getRoot()
+
+        if(rootCheck == undefined){
+            clearInterval(this.timer)
+            this.heapRes=[]
+            algoDisp.style.display = 'block'
+            return
+        }
+
+        this.heapRes.push(rootCheck)
+        if(this.items.length == 0)
+            flag = 0
+
+        this.IOHandler.clearDiv(outConti)
+        this.IOHandler.doneSorting(outConti,this.oItems,this.heapRes)
+
+        this.IOHandler.draw(outputDiv,this.heapRes,[rootCheck+" is the min heap's root"],flag)
+
+    }
 
     bubbleSort = () => {
         let flag = 0
@@ -135,6 +197,8 @@ class InputOutput{
             bubblePre.style.display = 'block'
         else if (selected == "Selection")
              selectionPre.style.display = 'block'
+        else if (selected == "Heap")
+            heapPre.style.display = 'block'
     }
 
 
@@ -172,6 +236,25 @@ class InputOutput{
 
     }
 
+    doneSorting = (div,items,doneItem) =>{
+        let sortedItems = [...items].sort((a, b) => a - b)
+        let itemsSize = items.length
+        let out = document.createElement("div")
+        let balls = document.createElement("div")
+        balls.className = "col"
+        out.className = "series row col-12"
+        for( let i of items){
+            let node = document.createElement("div")
+            doneItem.includes(i)?node.className = "ball blue":node.className = "ball red"
+            let textnode = document.createTextNode(i)
+            node.appendChild(textnode)
+            node.style.transform = "scale("+(0.4+(sortedItems.indexOf(i)+1)/itemsSize)+")"
+            balls.appendChild(node)
+        }
+        out.appendChild(balls)
+        div.appendChild(out)
+    }
+
     endOfPage = () => window.scrollTo(0,document.body.scrollHeight) 
 }
 
@@ -194,6 +277,8 @@ sortBtn.onclick = () => {
         selectedAlgo = mySorting.bubbleSort
     else if(algoSel.value == "Selection")
         selectedAlgo = mySorting.selectionSort
+    else if(algoSel.value == "Heap")
+        selectedAlgo = mySorting.heapSort
 
     mySorting.Timer = setInterval(selectedAlgo, 1000)
 }

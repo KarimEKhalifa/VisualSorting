@@ -50,6 +50,10 @@
     background-color: green;
   }
 
+  .blue{
+    background-color: #007bff;
+  }
+
   body {
     background: linear-gradient(-45deg, #ca8671, #8f4a64, #3f6472, #53867a);
     background-size: 1000% 1000%;
