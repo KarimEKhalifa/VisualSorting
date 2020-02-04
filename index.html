@@ -54,21 +54,16 @@ end SelectionSort
                     </pre>
                     <pre class = "Algo col jumbotron" id="heapPre">
 begin Heapsort(list)
-   BuildHeap(list)
+   Heapify(list,0)
    for i = length(list) to 2 
       swap list[1] and list[i]
       heapsize = heapsize -1
       Heapify(list, 1)
-
-BuildHeap(list) 
-   heapsize = length(list)
-   for i = floor( length/2 ) to 1
-      Heapify(list, i)
-
+      
 Heapify(list, i) 
    le = left(list)
    ri = right(list)
-   if (le <= heapsize) and (list[le] > A[i])
+   if (le <= heapsize) and (list[le] > list[i])
       largest = le
    else
       largest = i 

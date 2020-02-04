@@ -2,10 +2,8 @@ class Sorting{
 
     constructor(items,IO){
         this.items = items
-        this.oItems = [...items]
         this.timer = ""
         this.steps = []
-        this.heapRes = []
         this.IOHandler = IO
         this.iteration = 0
     }
@@ -36,25 +34,32 @@ class Sorting{
 
     heapSort = () => {
         let flag = 1
+        this.iteration++
         let myHeap = new Heapify(this.items)
-        myHeap.minHeap()
-        let rootCheck = myHeap.getRoot()
+        for(let i = this.items.length-this.iteration; i>-1;i--)
+            myHeap.maxHeap(this.items.length-this.iteration,i)
 
-        if(rootCheck == undefined){
-            clearInterval(this.timer)
-            this.heapRes=[]
-            algoDisp.style.display = 'block'
-            return
-        }
+        let temp = this.items[this.items.length-this.iteration]
+        this.items[this.items.length-this.iteration] = this.items[0]
+        this.items[0] = temp
+        myHeap.maxHeap(this.items.length-this.iteration,0)
+        
 
-        this.heapRes.push(rootCheck)
-        if(this.items.length == 0)
+
+        if (this.iteration == this.items.length ){
             flag = 0
+            clearInterval(this.timer)
+            this.steps = []
+            this.IOHandler.clearDiv(outConti)
+            this.IOHandler.draw(outConti,this.items,[],flag)
+            algoDisp.style.display = 'block'
+            this.iteration = 0
+        }  
 
         this.IOHandler.clearDiv(outConti)
-        this.IOHandler.doneSorting(outConti,this.oItems,this.heapRes)
 
-        this.IOHandler.draw(outputDiv,this.heapRes,[rootCheck+" is the min heap's root"],flag)
+        this.IOHandler.draw(outConti,this.items,[],flag)
+        this.IOHandler.draw(outputDiv,this.items,flag==1?[this.items[this.items.length-this.iteration]+" is the maxHeap's leaf node"]:[],flag)
 
     }
 

@@ -16,20 +16,23 @@ class Heapify{
         return this.list.shift()
     }
 
-    minHeap = () => {
-        let min = this.list[0]
-        let minIndex = 0
-        for( let i in this.list){
-            if(this.list[i]<min){
-                min = this.list[i]
-                minIndex = i
-            }
+    maxHeap = (subRoot,i) => {
+        let largest = i
+        let left = 2*i+1
+        let right = 2*i+2
+
+        if(left < subRoot && this.list[i] < this.list[left])
+            largest = left
+        
+        if(right < subRoot && this.list[largest] < this.list[right])
+            largest = right
+        
+        if(largest != i){
+            let temp = this.list[i]
+            this.list[i] = this.list[largest]
+            this.list[largest] = temp
+            this.maxHeap(subRoot,largest)
         }
 
-        if(minIndex!=0){
-            let temp = this.list[0]
-            this.list[0] = this.list[minIndex]
-            this.list[minIndex] = temp
-        }
     }
 }
